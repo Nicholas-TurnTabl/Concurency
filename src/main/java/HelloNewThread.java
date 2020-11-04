@@ -9,17 +9,23 @@ public class HelloNewThread {
             print("Goodbye");
         });
         try {
-            Thread.sleep(5_000);
+           Thread.sleep(5_000);
             executor.shutdownNow();
             executor.awaitTermination(3,TimeUnit.SECONDS);
-        } catch (InterruptedException ignore){}
+        } catch (InterruptedException ignore){
+            Thread.currentThread().interrupt();
+        }
     }
+
+
     static void print(String message) {
         try {
             for (int i=0; i<5; ++i) {
                 System.out.println(message);
                 Thread.sleep(1_000);
             }
-        } catch (InterruptedException ignore){ }
+        } catch (InterruptedException ignore){
+            Thread.currentThread().interrupt();
+        }
     }
 }
